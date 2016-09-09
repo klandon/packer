@@ -2,10 +2,10 @@
     "builders" :[{
         "type": "amazon-ebs",
         "communicator" : "ssh",
-        "vpc_id" : "vpc-ca024bad",
+        "vpc_id" : "",
         "associate_public_ip_address":true,
-        "subnet_id" : "subnet-f83923a0",
-        "security_group_ids" : ["sg-d8f773a2"],
+        "subnet_id" : "",
+        "security_group_ids" : [""],
         "access_key": "",
         "secret_key": "",
         "region": "us-east-1",
