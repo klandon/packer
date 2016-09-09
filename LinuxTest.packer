@@ -1,0 +1,23 @@
+{
+    "builders" :[{
+        "type": "amazon-ebs",
+        "communicator" : "ssh",
+        "vpc_id" : "vpc-ca024bad",
+        "associate_public_ip_address":true,
+        "subnet_id" : "subnet-f83923a0",
+        "security_group_ids" : ["sg-d8f773a2"],
+        "access_key": "",
+        "secret_key": "",
+        "region": "us-east-1",
+        "source_ami": "ami-2d39803a",
+        "instance_type": "t2.micro",
+        "ssh_username": "ubuntu",
+        "user_data_file" : "./cloud-init/ubuntu-test",
+        "ami_name": "LandonTek Packer Demo 0.0 CI {{timestamp}}",
+        "tags": {
+                "OS_Version": "ubuntu",
+                "Release": "0.0",
+                "LandonTek" : "packer demo"       
+            }
+        }]
+}

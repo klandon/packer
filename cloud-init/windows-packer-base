@@ -1,0 +1,14 @@
+#cloud-config
+
+script: |
+ <powershell>
+    net user devops MyPassword@1 /add
+    net localgroup administrators devops /add
+    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+    netsh advfirewall set allprofiles state off
+    wmic useraccount where "name='devops'" set PasswordExpires=FALSE
+    winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="0"}'  
+    winrm set winrm/config '@{MaxTimeoutms="7200000"}'  
+    winrm set winrm/config/service '@{AllowUnencrypted="true"}'  
+    winrm set winrm/config/service/auth '@{Basic="true"}'
+</powershell>

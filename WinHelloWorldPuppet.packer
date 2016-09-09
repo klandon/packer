@@ -1,0 +1,54 @@
+{
+
+    "variables" :{
+            "base_ami" : "ami-bd3ba0aa",
+            "instance_size": "t2.micro",
+            "aws_key": "",
+            "admin_name": "Administrator",
+            "aws_secrete" : "",
+            "new_ami_name": "NotSet"
+
+    },
+
+    "builders" :[{
+        "type": "amazon-ebs",
+        "communicator" : "winrm",
+        "vpc_id" : "vpc-ca024bad",
+        "associate_public_ip_address":true,
+        "subnet_id" : "subnet-f83923a0",
+        "security_group_ids" : ["sg-d8f773a2"],
+        "access_key": "{{user `aws_key`}}",
+        "secret_key": "{{user `aws_secrete`}}",
+        "region": "us-east-1",
+        "source_ami": "{{user `base_ami`}}",
+        "instance_type": "{{user `instance_size`}}",
+        "winrm_username": "{{user `admin_name`}}",
+        "winrm_port" : "5985",
+        "user_data_file" : "./cloud-init/windows-packer-base",
+        "ami_name": "{{user `new_ami_name`}} Built On {{timestamp}}",
+        "tags": {
+                "Application" : "Hello World Basic",
+                "Release": "0.0",
+                "LandonTek" : "Packer Demo Version 0.0"       
+            }
+        }],
+
+    "provisioners" :[
+        {
+            "type": "powershell",
+            "inline": "New-Item -path 'c:/globalcert/' -type directory"
+        },
+        {
+            "type":"file",
+            "source":"./files/globalcert/puppet-modules.pem",
+            "destination":"c:/globalcert/puppet-modules.pem"
+        },
+        {
+            "type": "powershell",
+            "script": "./scripts/pup_install_windows.ps1",
+            "elevated_user" : "devops",
+            "elevated_password":"MyPassword@1"
+        }
+
+    ]
+}
