@@ -3,28 +3,32 @@
     "variables" :{
             "base_ami" : "ami-bd3ba0aa",
             "instance_size": "t2.micro",
-            "aws_key": "",
             "admin_name": "administrator",
+            "vpc_id" : "",
+            "subnet_id":"",
+            "security_group":"",
+            "aws_key": "",
             "aws_secrete" : "",
+            "region":"us-east-1",
             "new_ami_name": "NotSet"
-
+        
     },
 
     "builders" :[{
         "type": "amazon-ebs",
         "communicator" : "winrm",
-        "vpc_id" : "",
+        "vpc_id" : "{{user `vpc_id`}}",
         "associate_public_ip_address":true,
-        "subnet_id" : "",
-        "security_group_ids" : [""],
+        "subnet_id" : "{{user `subnet_id`}}",
+        "security_group_ids" : ["{{user `security_group`}}"],
         "access_key": "{{user `aws_key`}}",
         "secret_key": "{{user `aws_secrete`}}",
-        "region": "us-east-1",
+        "region": "{{user `region`}}",
         "source_ami": "{{user `base_ami`}}",
         "instance_type": "{{user `instance_size`}}",
         "winrm_username": "{{user `admin_name`}}",
         "winrm_port" : "5985",
-        "user_data_file" : "./cloud-init/windows-packer-puppet",
+        "user_data_file" : "./cloud-init/windows-packer-base",
         "ami_name": "{{user `new_ami_name`}} Built On {{timestamp}}",
         "tags": {
                 "Application" : "Hello World Basic",
