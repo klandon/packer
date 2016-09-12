@@ -52,7 +52,20 @@
             "script": "./scripts/pup_install_windows.ps1",
             "elevated_user" : "devops",
             "elevated_password":"MyPassword@1"
+        },
+         {
+            "type": "powershell",
+            "script": "./scripts/windows_base_settings.ps1",
+            "elevated_user" : "devops",
+            "elevated_password":"MyPassword@1"
+        },
+        {
+            "type": "puppet-masterless",
+            "manifest_file":"./puppet/environments/sandbox/manifests/WindowsHellowWorld.pp",
+            "module_paths":"./puppet/modules/"
+
         }
+
 
     ]
 }
