@@ -60,12 +60,27 @@
             "elevated_password":"MyPassword@1"
         },
         {
-            "type": "puppet-masterless",
-            "manifest_file":"./puppet/environments/sandbox/manifests/WindowsHellowWorld.pp",
-            "module_paths":"./puppet/modules/"
-
+            "type":"file",
+            "source":"./puppet/environments/sandbox/manifests/WindowsHelloWorld.pp",
+            "destination":"c:/puppet/manifests/WindowsHelloWorld.pp"
+        },
+        {
+            "type":"file",
+            "source":"./puppet/modules/",
+            "destination":"C:/ProgramData/PuppetLabs/puppet/etc/modules/"
+        },
+        {
+            "type": "powershell",
+            "inline": " puppet apply --verbose --modulepath=C:/ProgramData/PuppetLabs/puppet/etc/modules c:/puppet/manifests/WindowsHelloWorld.pp",
+            "elevated_user" : "devops",
+            "elevated_password":"MyPassword@1"
+        },
+        {
+            "type":"file",
+            "source":"./files/ahelloworld/index.html",
+            "destination":"C:/inetpub/wwwroot/helloworld/index.html"
         }
-
+        
 
     ]
 }

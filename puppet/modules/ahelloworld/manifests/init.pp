@@ -12,10 +12,4 @@ class ahelloworld {
     app_pool      => 'my_application_pool',
   }
 
-  exec {'copy_index':
-    command => 'cp c:/vagrant/files/ahelloworld/* C:/inetpub/wwwroot/helloworld',
-    provider => powershell,
-    require =>  iis::manage_site['www.helloworld.com'],
-
-  }
 }
