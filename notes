@@ -1,6 +1,0 @@
-        {
-            "type": "puppet-masterless",
-            "manfiest_file":"./puppet/environments/sandbox/manifests/WindowsHellowWorld.pp",
-            "module_paths":"./puppet/modules/"
-
-        }
